@@ -17,7 +17,7 @@
 \date{\today}
 \author{Matthias Vogelgesang}
 \institute{Center for modern beamer themes}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
 
 \begin{document}
 
@@ -27,6 +27,158 @@
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
+%---------------------------------------------------------------------------------
+%-----------------------Taylor-series Method--------------------------------------
+%---------------------------------------------------------------------------------
+\section{Taylor-series Method}
+
+\begin{frame}{Taylor-series Method}
+	We are given:
+  $$ r_{i,1}^2=cd_{i,1}=r_{i}-r_{1} $$
+  Linearize above equation by Taylor-series expansion and then solve iteratively:
+	\begin{itemize}
+    \item Compute position deviation
+    \item Add position deviation to initial guess
+    \item Solve again until deviation is considerably small
+  \end{itemize}
+  \alert{Convergence is not guaranteed}
+\end{frame}
+
+
+\begin{frame}{Taylor-series Method}
+	The position deviation is computed by:
+   $$\begin{bmatrix} \Delta x \\ \Delta y \end{bmatrix} = (G_{t}^T Q^{-1} G_{t})^{-1} G_{t}^T Q^{-1} h_{t}$$
+  where $h_{t}$ and $G_{t}$ are given as follows
+ \begin{align}
+    h_{t} &= \begin{bmatrix} r_{2,1} - (r_{2}-r_{1}) \\  r_{3,1} - (r_{3}-r_{1})\\  \quad\\  r_{M,1} - (r_{M}-r_{1}) \end{bmatrix}  \\
+    G_{t} &= \begin{bmatrix} (x_{1}-x)/r_{1} - (x_{2}-x)/r_{2} & (y_{1}-y)/r_{1} - (y_{2}-y)/r_{2} \\ (x_{1}-x)/r_{1} - (x_{2}-x)/r_{3} & (y_{1}-y)/r_{1} - (y_{3}-y)/r_{3}\\  \quad\\ (x_{1}-x)/r_{1} - (x_{M}-x)/r_{M} & (y_{1}-y)/r_{1} - (y_{M}-y)/r_{M} \end{bmatrix}
+  \end{align}
+
+\end{frame}
+%--------------------------end--------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+%------------------------Spherical Interpolation Method-------------------------------
+%-------------------------------------------------------------------------------------
+\section{Spherical-Interpolation Method}
+
+% page 1
+\begin{frame}{The Equation-Error Formulation}
+  We first map the spatial origin to an arbitrary sensor j, this gives:
+  $$ \underline{x}_{j}\triangleq \underline{0}\Longrightarrow \begin{cases} R_{j} &= \ 0 \\ D_{j} &= \ R_{s} \end{cases}$$
+  From the Pythagorean theorem, we have:
+  $$(R_{s}+d_{ij})^2 = R_{i}^2 - 2\underline{x}_{i}^T \underline{x}_{s} + R_{s}^2 $$
+  which is also:
+  $$ 0 = R_{i}^2 - d_{ij}^2 -2R_{s}d_{ij} - 2\underline{x}_{i}^T \underline{x}_{s} $$
+  \begin{center}
+  \includegraphics[scale=0.7]{Pythagorean.JPG}
+  \end{center}
+\end{frame}
+% page 2
+\begin{frame}{The Equation-Error Fomulation}
+  If we take the first sensor as origin, i.e. $j=1$ \\
+  As the delays are typically not measured precisely, we introduce "equation error"
+  $$ \epsilon_{i} = R_{i}^2 - d_{ij}^2 -2R_{s}d_{ij} - 2\underline{x}_{i}^T \underline{x}_{s} \quad (i=2,3,\ldots,N) $$
+  where $\epsilon_{i}$ is to be minimized.
+  With N-1 measurements, this equation can be written in matrix notaion:
+  $$ \underline{\epsilon} = \underline{\sigma} - 2R_{s}\underline{d} - 2S\underline{x}_{s} $$
+  where
+  \begin{align*}
+    \underline{\sigma}\triangleq \begin{bmatrix} R_{2}^2 - d_{21}^2 \\ R_{3}^2 - d_{31}^2 \\ \vdots \\ R_{N}^2 - d_{N1}^2 \end{bmatrix} \qquad
+    \underline{d}\triangleq \begin{bmatrix} d_{21}\\ d_{31} \\ \vdots \\ d_{N1} \end{bmatrix} \qquad
+    \textbf{S} \triangleq \begin{bmatrix} x_2 & y_2 \\x_3 & y_3\\ \vdots & \vdots \\ x_N & y_N \end{bmatrix}
+  \end{align*}
+\end{frame}
+% page 3
+\begin{frame}{The Spherical-Interpolation Method}
+  The formal least-squares solution for $\underline{x}_s$ \alert{given} $R_s$ is
+  $$ \underline{x}_s = \frac{1}{2} S_W^* (\underline{\sigma} - 2R_s\underline{d})$$
+  where
+  $$  S_W^* \triangleq (S^T S)^{-1}S^T $$
+  The \alert{SI} method is to minimize the equation error agian with respect to $R_s$.
+  i.e. rewriting the equation error to eliminate $\underline{x}_s$ by substituting it with $R_s$, yielding a new equation error $\underline{\epsilon}^{'}$ which is linear in $R_s$:
+  \begin{align*}
+   \underline{\epsilon}^{'} &= \underline{\sigma} - 2R_s\underline{d} - S S^*_W (\underline{\epsilon} - 2R_s\underline{d})\\
+                            &= (I - S S_W^*)(\underline{\epsilon} - 2R_s\underline{d})
+  \end{align*}
+  We notice that the formal least-squares estimate of  $\underline{x}_s$ \alert{given} $R_s$ is itself \textsc{linear} in $R_s$. When the minimizing $R_s$ value is found
+  in this new equation, the corresponding value of $\underline{x}_s$ is automatically a minimizer of the squared equation-error norm.
+\end{frame}
+% page 4
+\begin{frame}{The Spherical-Interpolation Method}
+  The solution is given by
+  $$ \tilde{R}_s = \frac{\underline{d}^T P_s^{\bot}V P_s^{\bot}\underline{\sigma}}{2\underline{d}^T P_s^{\bot} V P_s^{\bot}\underline{d}}$$
+  where $P_s^{\bot}$ is defined as
+  $$P_s^{\bot} \triangleq I - SS_W^*$$
+  Substituting this solution into
+  $$ \underline{x}_s = \frac{1}{2} S_W^* (\underline{\sigma} - 2R_s\underline{d})$$
+  yields the source location estimate
+  $$ \hat{\underline{x}}_s = \frac{1}{2} (S^T W S)^{-1} S^T W (I - \frac{\underline{d}\ \underline{d}^T P_s^{\bot} V P_s^{\bot}} {\underline{d}^T P_s^{\bot} V P_s^{\bot} \underline{d}}) \underline{\sigma}$$
+\end{frame}
+% page 5
+\begin{frame}{The Spherical-Interpolation Method}
+  When $W = V$ , this estimator is the minimizer of the weighted norm of the \alert{projected} equation error
+  $$ Z_{\underline{x}_s} = \underline{\epsilon}^T P_{\underline{d}}^{\bot} W P_{\underline{d}}^{\bot} \underline{\epsilon} $$
+  Minimizing $Z_{\underline{x}_s}$, one gets a simplified expression of the estimator
+  $$ \hat{\underline{x}}_s = \frac{1}{2} (S^T  P_{\underline{d}}^{\bot} W P_{\underline{d}}^{\bot} S)^{-1} S^T P_{\underline{d}}^{\bot} \underline{\sigma} $$
+  By now, the \alert{Maximum Likelihood Estimation} of the $\underline{x}_s$ is obtained.
+  \vfill
+  \textsc{in simulation:\\}
+  The weighting matrices $\textbf{W}$ and $\textbf{V}$ are both set to $\textbf{Q}^{-1}$
+\end{frame}
+%-----------------------------------------end-----------------------------------------
+
+%-------------------------------------------------------------------------------------
+%----------------------------------------CRLB-----------------------------------------
+%-------------------------------------------------------------------------------------
+\section{Cram\'{e}r-Rao Lower Bound}
+
+% page 1
+\begin{frame}{Cram\'{e}r-Rao Lower Bound}
+  In the simplest form, the CRLB states that the variance of any unbiased estimator
+  is no smaller than the inverse of the Fisher information matrix.
+   $$\textbf{var}(\hat{\theta}) \geqslant \textbf{J}(\theta)^{-1} $$
+  It is derived from the \textsc{appendix} that the CRLB of the localization problem
+  is given by
+   $$ \Phi^0 = c^2 (\textbf{G}_t^{0T} \textbf{Q}^{-1} \textbf{G}_l^0)^{-1} $$
+  Also, it is proved that the proposed method with arbitrary sensor array can achieve CRLB,
+  therefore, one can use the following method to compute the lower bound of covariance matrix
+  \begin{align*}
+    \Phi^0 &= \text{cov}(\textbf{z}_p) = \frac{1}{4} \textbf{B}^{''-1} \text{cov} (\textbf{z}_a^{'}) \textbf{B}^{''-1} \\
+           &= c^2 ( \textbf{B}^{''} \textbf{G}_a^{'T} \textbf{B}^{'-1} \textbf{G}_a^{0T} \textbf{B}^{-1} \textbf{Q}^{-1} \textbf{B}^{-1} \textbf{G}_a^{0}  \textbf{B}^{'-1} \textbf{G}_a^{'} \textbf{B}^{''} )^{-1}
+  \end{align*}
+  which is the covariance matrix of $\textbf{z}_p$ when errors are ignored.
+  \begin{center}
+    \textsc{Predefined matrices are given in the next slide}
+  \end{center}
+\end{frame}
+% page 2
+\begin{frame}{Cram\'{e}r-Rao Lower Bound}
+  \begin{equation*}
+    \Phi^0 = c^2 ( \textbf{B}^{''} \textbf{G}_a^{'T} \textbf{B}^{'-1} \textbf{G}_a^{0T} \textbf{B}^{-1} \textbf{Q}^{-1} \textbf{B}^{-1} \textbf{G}_a^{0}  \textbf{B}^{'-1} \textbf{G}_a^{'} \textbf{B}^{''} )^{-1}
+  \end{equation*}
+  where
+  \begin{align*}
+     \textbf{G}_a^0   &= - \begin{bmatrix} x_2  & y_2 & r_2-r_1 \\   x_3  & y_3 & r_3-r_1 \\ \vdots & \vdots & \vdots \\  x_M  & y_M & r_M-r_1 \end{bmatrix} \qquad \qquad
+     \textbf{B}^{''}  = \begin{bmatrix} (x^0 - x_1) & 0 \\  0 & (y^0 - y_1)\end{bmatrix}\\
+     \textbf{B}^{'}\  &= \text{diag}\{(x^0 - x_1),(y^0 - y_1),r_1^0\}\qquad
+     \textbf{G}_a^{'} = \begin{bmatrix} 1 & 0 & 1 \\  0 & 1 & 1\end{bmatrix}^{'} \\
+     \textbf{B}  \ \  &= \text{diag}\{r_2^0, r_3^0, \cdots r_M^0\}
+   \end{align*}
+   The covariance matrix of position estimate contains the uncertainty information in localization.
+   In particular, the position mean-square error (\textsc{MSE}) is equal to the \alert{trace} of $\Phi$.
+\end{frame}
+%-----------------------------------------end-----------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 \section{Introduction}
 
