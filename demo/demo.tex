@@ -12,12 +12,13 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{Metropolis}
-\subtitle{A modern beamer theme}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\title{Mid-term Project}
+\subtitle{Chan and Ho: A Simple and Efficient Estimator for Hyperbolic Location System}
 \date{\today}
-\author{Matthias Vogelgesang}
-\institute{Center for modern beamer themes}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+\author{Zhang Niansong\quad(16308149) \\ Yang Songyi\quad(16308131)}
 
 \begin{document}
 
@@ -30,307 +31,187 @@
 
 \section{Introduction}
 
-\begin{frame}[fragile]{Metropolis}
-
-  The \themename theme is a Beamer theme with minimal visual noise
-  inspired by the \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
-  Theme} by Benjamin Weiss.
-
-  Enable the theme by loading
-
-  \begin{verbatim}    \documentclass{beamer}
-    \usetheme{metropolis}\end{verbatim}
-
-  Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX
-  installed to enjoy this wonderful typography.
-\end{frame}
-\begin{frame}[fragile]{Sections}
-  Sections group slides of the same topic
-
-  \begin{verbatim}    \section{Elements}\end{verbatim}
-
-  for which \themename provides a nice progress indicator \ldots
-\end{frame}
-
-\section{Title formats}
-
-\begin{frame}{Metropolis title formats}
-	\themename supports 4 different title formats:
-	\begin{itemize}
-		\item Regular
-		\item \textsc{Small caps}
-		\item \textsc{all small caps}
-		\item ALL CAPS
-	\end{itemize}
-	They can either be set at once for every title type or individually.
-\end{frame}
-
-{
-    \metroset{titleformat frame=smallcaps}
-\begin{frame}{Small caps}
-	This frame uses the \texttt{smallcaps} title format.
-
-	\begin{alertblock}{Potential Problems}
-		Be aware that not every font supports small caps. If for example you typeset your presentation with pdfTeX and the Computer Modern Sans Serif font, every text in small caps will be typeset with the Computer Modern Serif font instead.
-	\end{alertblock}
-\end{frame}
-}
-
-{
-\metroset{titleformat frame=allsmallcaps}
-\begin{frame}{All small caps}
-	This frame uses the \texttt{allsmallcaps} title format.
-
-	\begin{alertblock}{Potential problems}
-		As this title format also uses small caps you face the same problems as with the \texttt{smallcaps} title format. Additionally this format can cause some other problems. Please refer to the documentation if you consider using it.
-
-		As a rule of thumb: just use it for plaintext-only titles.
-	\end{alertblock}
-\end{frame}
-}
-
-{
-\metroset{titleformat frame=allcaps}
-\begin{frame}{All caps}
-	This frame uses the \texttt{allcaps} title format.
-
-	\begin{alertblock}{Potential Problems}
-		This title format is not as problematic as the \texttt{allsmallcaps} format, but basically suffers from the same deficiencies. So please have a look at the documentation if you want to use it.
-	\end{alertblock}
-\end{frame}
-}
-
-\section{Elements}
-
-\begin{frame}[fragile]{Typography}
-      \begin{verbatim}The theme provides sensible defaults to
-\emph{emphasize} text, \alert{accent} parts
-or show \textbf{bold} results.\end{verbatim}
-
-  \begin{center}becomes\end{center}
-
-  The theme provides sensible defaults to \emph{emphasize} text,
-  \alert{accent} parts or show \textbf{bold} results.
-\end{frame}
-
-\begin{frame}{Font feature test}
-  \begin{itemize}
-    \item Regular
-    \item \textit{Italic}
-    \item \textsc{Small Caps}
-    \item \textbf{Bold}
-    \item \textbf{\textit{Bold Italic}}
-    \item \textbf{\textsc{Bold Small Caps}}
-    \item \texttt{Monospace}
-    \item \texttt{\textit{Monospace Italic}}
-    \item \texttt{\textbf{Monospace Bold}}
-    \item \texttt{\textbf{\textit{Monospace Bold Italic}}}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Lists}
+\begin{frame}{Position Fix by TDOA}
   \begin{columns}[T,onlytextwidth]
-    \column{0.33\textwidth}
-      Items
+    \column{0.6\textwidth}
       \begin{itemize}
-        \item Milk \item Eggs \item Potatoes
+        \item Assuming a source is emitting signal in all directions
+              and an array of sensors are picking up the signal,
+              it will arrive at different sensors at different time.
+        \item \textbf{TDOA :} \textit{Time Difference Of Arrival}
+        \item Then the location of the source can be estimated
+              by measuring the delay of signal arriving at different sensor.
       \end{itemize}
-
-    \column{0.33\textwidth}
-      Enumerations
-      \begin{enumerate}
-        \item First, \item Second and \item Last.
-      \end{enumerate}
-
-    \column{0.33\textwidth}
-      Descriptions
-      \begin{description}
-        \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
-      \end{description}
+    \column{0.3\textwidth}
+      \begin{figure}[t]
+        \includegraphics[width=1\textwidth]{intro.png}
+        \caption{Sensors and source.}
+      \end{figure}
   \end{columns}
 \end{frame}
-\begin{frame}{Animation}
+
+\begin{frame}{Position Fix by TDOA: Noise}
+  Vector of \textbf{TDOA}:
+    $$\bf{d} = \begin{bmatrix} d_2-d_1 & d_3-d_1 & \cdots \end{bmatrix}^\it{T}$$
+  However, 100\% precise measurement of \textbf{TDOA} is not possible.
+  Noise is always present.
+
+  Naturally, the noise in \textbf{TDOA} is a \textit{multivariate Gaussian distribution}
+  centered at true value, with covariance given by matrix:
+    $$ \mathbf{Q} = \sigma^2
+      \begin{bmatrix}
+        1 & 0.5 & \cdots & 0.5 \\
+        0.5 & 1 & \cdots & 0.5 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0.5 & 0.5 & \cdots & 1 \end{bmatrix}
+    $$
+    where $\sigma^2$ is the noise power.
+\end{frame}
+
+\section{Propsed Method}
+
+\begin{frame}{Proposed Method}
   \begin{itemize}[<+- | alert@+>]
-    \item \alert<4>{This is\only<4>{ really} important}
-    \item Now this
-    \item And now this
+    \item By assuming $x, y$ and $r_1$ are independent, the non-linear
+          equations can be reduced into linear ones.
+
+    \item Given different situations, use \emph{Maximum Likelihood} (ML)
+          estimator to solve the linear equations.
+
+    \item Incorporate the dependent relationship back into the solution (if necessary)
+          to get more accurate solution.
+
   \end{itemize}
 \end{frame}
-\begin{frame}{Figures}
+
+\begin{frame}{Proposed Method: Workflow}
+
   \begin{figure}
-    \newcounter{density}
-    \setcounter{density}{20}
-    \begin{tikzpicture}
-      \def\couleur{alerted text.fg}
-      \path[coordinate] (0,0)  coordinate(A)
-                  ++( 90:5cm) coordinate(B)
-                  ++(0:5cm) coordinate(C)
-                  ++(-90:5cm) coordinate(D);
-      \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
-      \foreach \x in {1,...,40}{%
-          \pgfmathsetcounter{density}{\thedensity+20}
-          \setcounter{density}{\thedensity}
-          \path[coordinate] coordinate(X) at (A){};
-          \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
-                              -- (C) coordinate[pos=.10](B)
-                              -- (D) coordinate[pos=.10](C)
-                              -- (X) coordinate[pos=.10](D);
-          \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
-      }
-    \end{tikzpicture}
-    \caption{Rotated square from
-    \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{proposed-workflow.png}
+    \caption{Flowchart of the proposed method.}
   \end{figure}
 \end{frame}
-\begin{frame}{Tables}
-  \begin{table}
-    \caption{Largest cities in the world (source: Wikipedia)}
-    \begin{tabular}{@{} lr @{}}
-      \toprule
-      City & Population\\
-      \midrule
-      Mexico City & 20,116,842\\
-      Shanghai & 19,210,000\\
-      Peking & 15,796,450\\
-      Istanbul & 14,160,467\\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-\end{frame}
-\begin{frame}{Blocks}
-  Three different block environments are pre-defined and may be styled with an
-  optional background color.
 
-  \begin{columns}[T,onlytextwidth]
-    \column{0.5\textwidth}
-      \begin{block}{Default}
-        Block content.
-      \end{block}
-
-      \begin{alertblock}{Alert}
-        Block content.
-      \end{alertblock}
-
-      \begin{exampleblock}{Example}
-        Block content.
-      \end{exampleblock}
-
-    \column{0.5\textwidth}
-
-      \metroset{block=fill}
-
-      \begin{block}{Default}
-        Block content.
-      \end{block}
-
-      \begin{alertblock}{Alert}
-        Block content.
-      \end{alertblock}
-
-      \begin{exampleblock}{Example}
-        Block content.
-      \end{exampleblock}
-
-  \end{columns}
-\end{frame}
-\begin{frame}{Math}
-  \begin{equation*}
-    e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
-  \end{equation*}
-\end{frame}
-\begin{frame}{Line plots}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mlineplot,
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-        \addplot {sin(deg(x))};
-        \addplot+[samples=100] {sin(deg(2*x))};
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Bar charts}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mbarplot,
-        xlabel={Foo},
-        ylabel={Bar},
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-      \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
-      \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
-      \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
-
-      \legend{lorem, ipsum, dolor}
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Quotes}
-  \begin{quote}
-    Veni, Vidi, Vici
-  \end{quote}
+\begin{frame}{Proposed Method: Arbitrary Array}
+  "Arbitrary" refers to that sensors are arranged in a non-linear manner,
+  thus avoiding singularity during computation.
+  \begin{itemize}
+    \item With \alert{3} sensors ($M = 3$), system is not overdetermined.
+            $$\mathbf{z}_p = - \begin{bmatrix}x_{2,1}&y_{2,1} \\ x_{3,1}&y_{3,1}\end{bmatrix}^{-1} \times
+              \begin{Bmatrix} \begin{bmatrix}r_{2,1}\\r_{3,1}\end{bmatrix}r_1 + \frac{1}{2}
+                              \begin{bmatrix}r_{2,1}^2-K_2+K_1 \\ r_{3,1}^2-K_3+K_1 \end{bmatrix}\end{Bmatrix}$$
+            $$r_1^2 = K_1-
+              2\begin{bmatrix}x_1&y_1\end{bmatrix} \mathbf{z}_p+
+              \mathbf{z}_p^T \mathbf{z}_p$$
+          where $K_i = x_i^2 + y_i^2, \mathbf{z}_p = \begin{bmatrix}x&y\end{bmatrix}^T$.
+    \item Therefore, the solution can be found simply by
+    \begin{enumerate}
+      \item solving a quadratic equation of $r_1$;
+      \item insert $r_1$ back and solve the linear equation groups of $x$ and $y$.
+    \end{enumerate}
+  \end{itemize}
 \end{frame}
 
-{%
-\setbeamertemplate{frame footer}{My custom footer}
-\begin{frame}[fragile]{Frame footer}
-    \themename defines a custom beamer template to add a text to the footer. It can be set via
-    \begin{verbatim}\setbeamertemplate{frame footer}{My custom footer}\end{verbatim}
-\end{frame}
-}
-
-\begin{frame}{References}
-  Some references to showcase [allowframebreaks] \cite{knuth92,ConcreteMath,Simpson,Er01,greenwade93}
-\end{frame}
-
-\section{Conclusion}
-
-\begin{frame}{Summary}
-
-  Get the source of this theme and the demo presentation from
-
-  \begin{center}\url{github.com/matze/mtheme}\end{center}
-
-  The theme \emph{itself} is licensed under a
-  \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-  Attribution-ShareAlike 4.0 International License}.
-
-  \begin{center}\ccbysa\end{center}
-
+\begin{frame}{Proposed Method: Arbitrary Array (cont'd)}
+  \begin{itemize}
+    \item With more than 3 sensors, the system is overdetermined.
+    \item Here we denote:
+            $$\mathbf{h}= \frac{1}{2}
+              \begin{bmatrix}r_{2,1}^2-K_2+K_1 \\
+                             r_{3,1}^2-K_3+K_1 \\
+                             \vdots \\
+                             r_{M,1}^2-K_M+K_1\end{bmatrix}$$
+            $$\mathbf{G}_a=-
+              \begin{bmatrix} x_{2,1} & y_{2,1} & r_{2,1} \\
+                              x_{3,1} & y_{3,1} & r_{3,1} \\
+                              \vdots  & \vdots  & \vdots  \\
+                              x_{M,1} & y_{M,1} & r_{M,1} \end{bmatrix}$$
+            $$\mathbf{B}= \textbf{diag} \{r_2^0,r_3^0,\cdots,r_M^0\}$$
+    \item
+  \end{itemize}
 \end{frame}
 
-\begin{frame}[standout]
-  Questions?
+\begin{frame}{Proposed Method: Arbitrary Array (cont'd)}
+  \begin{itemize}
+    \item Using ML estimator, $\mathbf{z}_a=\begin{bmatrix}x\\y\\r_1\end{bmatrix}$ can be obtained as
+          $$\begin{align}
+            \mathbf{z}_a&=\argmin\{(\mathbf{h}-\mathbf{G}_a\mathbf{z}_a)^T
+                                    \Psi^{-1}(\mathbf{h}-\mathbf{G}_a\mathbf{z}_a)\}\\
+                        &=(\mathbf{G}_a^T\Psi^{-1}\mathbf{G}_a)^{-1}\mathbf{G}_a^T\Psi^{-1}\mathbf{h}
+            \end{align}$$
+    \item When the emitter is far away from the sensors,
+          and since scaling of $\Psi$ do not effect the solution
+          $\mathbf{z}_a$can be approximated as
+          $$\mathbf{z}_a\approx(\mathbf{G}_a^T\mathbf{Q}^{-1}
+            \mathbf{G}_a)^{-1}\mathbf{G}_a^T\mathbf{Q}^{-1}\mathbf{h}$$
+    \item When the source is nearby, its location can still be approximated
+          using $\mathbf{Q}$, and using one iteration to improve accuracy.
+  \end{itemize}
 \end{frame}
 
-\appendix
-
-\begin{frame}[fragile]{Backup slides}
-  Sometimes, it is useful to add slides at the end of your presentation to
-  refer to during audience questions.
-
-  The best way to do this is to include the \verb|appendixnumberbeamer|
-  package in your preamble and call \verb|\appendix| before your backup slides.
-
-  \themename will automatically turn off slide numbering and progress bars for
-  slides in the appendix.
+\begin{frame}{Proposed Method: Dependency of Arbitrary Array}
+  \begin{itemize}
+    \item The next step is to consider the dependency between $x$, $y$ and $r_1$.
+    \item Again using ML, we have
+          $$\mathbf{z}_a^{'}=(\mathbf{G}_a^{'T}\Psi^{'-1}\mathbf{G}_a^{'})^{-1}
+                              \mathbf{G}_a^{'T}\Psi^{'-1}\mathbf{h}^{'}$$
+          where
+          $$\mathbf{h}^{'}=\begin{bmatrix}(x-x_1)^2\\(y-y_1)^2\\r_1^2\end{bmatrix},\quad
+            \mathbf{G}_a^{'}=\begin{bmatrix}1&0\\0&1\\1&1\end{bmatrix}$$
+          and
+          $$\Psi^{'}=4\mathbf{B}^{'}(\mathbf{G}_a^{0T}\Psi^{-1}\mathbf{G}_a^0)^{-1}\mathbf{B}^{'},\quad
+            \mathbf{B}^{'} = \textbf{diag} \{x-x_1,y-y_1,r_1^0\}$$
+  \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}{Proposed Method: Solution of Arbitrary Array}
+  \begin{itemize}
+    \item Similar simplification can be made when the source is far away,
+          by subsitituding $\Psi$ with $\mathbf{Q}$.
+    \item After acquiring $\mathbf{z}_a^{'}$, we have
+          $$\mathbf{z}_a^{'}=
+            \begin{bmatrix}(x^0-x_1)^2\\(y^0-y_1)^2\end{bmatrix}$$
+    \item Then $x^0$ and $y^0$ can be canculated by taking square roots of the positive values.
+  \end{itemize}
+\end{frame}
 
-  \bibliography{demo}
-  \bibliographystyle{abbrv}
+\begin{frame}{Proposed Method: Linear Array}
+  If the sensors are arranged linearly, i.e. on a line, then the positions
+  can be described by $$y=ax+b$$
 
+  Here the procedure used for \emph{Arbitrary Array} would fail due to matrix singularity.
+
+  However, a similar solution can be developed with slight modifications.
+\end{frame}
+
+\begin{frame}{Proposed Method: Linear Array (cont'd)}
+  \begin{itemize}
+    \item Taking the relationship $y=ax+b$, rewrite $\mathbf{z}_a$ and $\mathbf{G}_a$
+          as
+          $$\mathbf{z}_l=\begin{bmatrix}x+ay\\r_1\end{bmatrix},\quad
+            \mathbf{G}_l=-\begin{bmatrix}
+                          x_{2,1} & r_{2,1}\\
+                          x_{3,1} & r_{3,1}\\
+                          \vdots  & \vdots \\
+                          x_{M,1} & r_{M,1}\end{bmatrix}$$
+    \item We can have something very similar to that in arbitrary array
+          $$\mathbf{z}_l=(\mathbf{G}_l^T\Psi^{-1}\mathbf{G}_l)^{-1}\mathbf{G}_l^T\Psi^{-1}\mathbf{h}$$
+          where $\Psi$ and $\mathbf{h}$ are the same as in arbitrary Array.
+    \item Similar approach of taking $\mathbf{Q}$ for $\Psi$ and use of iteration can be applied here.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proposed Method: Solution of Linear Array}
+  We now have $\mathbf{z}_l=\begin{bmatrix}x+ay\\r_1\end{bmatrix}$,
+  denoted as $\mathbf{z}_l=\begin{bmatrix}w\\r_1\end{bmatrix}$.
+  \begin{itemize}
+    \item $y$ and $x$ can be solved through quadratic equation
+          $$y=\frac{-E\pm\sqrt{E^2-4AC}}{2A},\quad x=w-ay$$
+          where$$A=1+a^2,E=-2(aw+b),C=K_1-2x_1w+w^2-r_1^2$$
+    \item When $a=0$, the solution becomes
+          $$y=\pm\sqrt{r_1^2-(w-x_1)^2}+y_1,\quad x=w$$
+  \end{itemize}
 \end{frame}
 
 \end{document}
