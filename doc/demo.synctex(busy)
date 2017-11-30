@@ -1,0 +1,126 @@
+SyncTeX Version:1
+Input:1:C:\Users\14683\Desktop\LaTeX Template\demo\demo.tex
+Input:2:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamer.cls
+Input:3:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasemodes.sty
+Input:4:C:\Program Files\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty
+Input:5:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasedecode.sty
+Input:6:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty
+Input:7:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaseoptions.sty
+Input:8:C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty
+Input:9:C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty
+Input:10:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty
+Input:11:C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty
+Input:12:C:\Program Files\MiKTeX 2.9\tex\xelatex\xetexconfig\geometry.cfg
+Input:13:C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo
+Input:14:C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty
+Input:15:C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty
+Input:16:C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty
+Input:17:C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty
+Input:18:C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg
+Input:19:C:\Program Files\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty
+Input:20:C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty
+Input:21:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex
+Input:22:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.tex
+Input:23:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def
+Input:24:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex
+Input:25:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex
+Input:26:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
+Input:27:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.tex
+Input:28:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg
+Input:29:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-xetex.def
+Input:30:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-dvipdfmx.def
+Input:31:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-common-pdf.def
+Input:32:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.tex
+Input:33:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
+Input:34:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex
+Input:35:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex
+Input:36:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex
+Input:37:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex
+Input:38:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex
+Input:39:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex
+Input:40:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.tex
+Input:41:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometric.code.tex
+Input:42:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code.tex
+Input:43:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.code.tex
+Input:44:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.tex
+Input:45:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.tex
+Input:46:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.tex
+Input:47:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarithmetics.code.tex
+Input:48:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex
+Input:49:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex
+Input:50:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.code.tex
+Input:51:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.tex
+Input:52:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex
+Input:53:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.code.tex
+Input:54:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransformations.code.tex
+Input:55:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex
+Input:56:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreobjects.code.tex
+Input:57:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathprocessing.code.tex
+Input:58:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex
+Input:59:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex
+Input:60:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.tex
+Input:61:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.tex
+Input:62:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex
+Input:63:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransparency.code.tex
+Input:64:C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepatterns.code.tex
+Input:65:C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\xxcolor.sty
+Input:66:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\atbegshi.sty
+Input:67:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty
+Input:68:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty
+Input:69:C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
+Input:70:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+Input:71:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty
+Input:72:C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty
+Input:73:C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty
+Input:74:C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
+Input:75:C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+Input:76:C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hxetex.def
+Input:77:C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\puenc.def
+Input:78:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\stringenc.sty
+Input:79:C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty
+Input:80:C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\se-ascii-print.def
+Input:81:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaserequires.sty
+Input:82:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasecompatibility.sty
+Input:83:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasefont.sty
+Input:84:C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty
+Input:85:C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty
+Input:86:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasetranslator.sty
+Input:87:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\translator\translator.sty
+Input:88:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\translator\translator-language-mappings.tex
+Input:89:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasemisc.sty
+Output:pdf
+Magnification:1000
+Unit:1
+X Offset:0
+Y Offset:0
+Content:
+!7129
+{1
+[89,148:4736287,67400679:17266942,62664392,0
+[89,148:1864680,67400679:20138549,67400678,0
+[89,148:1864680,932340:20138549,932339,0
+h89,148:1864680,932340:20138549,0,0
+]
+[89,148:1864680,66468340:0,65536000,0
+(63,114:1864680,1587700:0,455111,127431
+h63,113:1864680,1587700:983040,0,0
+x63,113:6805376,1587700
+x63,113:8207121,1587700
+x63,113:8534802,1587700
+g63,114:8534802,1587700
+g63,114:8534802,1587700
+)
+]
+h89,148:1864680,67400679:20138549,0,0
+]
+]
+!457
+}1
+Input:90:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasetwoscreens.sty
+Input:91:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaseoverlay.sty
+Input:92:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasetitle.sty
+Input:93:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbasesection.sty
+Input:94:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaseframe.sty
+Input:95:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaseverbatim.sty
+Input:96:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbaseframesize.sty
+Input:97:C:\Program Files\MiKTeX 2.9\tex\latex\beamer\beamerbase
