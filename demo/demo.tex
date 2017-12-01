@@ -37,16 +37,19 @@
 \begin{frame}{Position Fix by TDOA}
   \begin{columns}[T,onlytextwidth]
     \column{0.6\textwidth}
-      \begin{itemize}
-        \item Assuming a source is emitting signal in all directions
-              and an array of sensors are picking up the signal,
-              it will arrive at different sensors at different time.
-        \item \textbf{TDOA :} \textit{Time Difference Of Arrival}
-        \item Then the location of the source can be estimated
-              by measuring the delay of signal arriving at different sensor.
-      \end{itemize}
-    \column{0.3\textwidth}
-      \begin{figure}[t]
+      Assuming a source is emitting signal in all directions and an array of
+      sensors are picking up the signal, it will arrive at different sensors at
+      different time.
+
+      \begin{center}
+        \textbf{TDOA :} \textit{Time Difference Of Arrival}
+      \end{center}
+
+      Then the location of the source can be estimated by measuring the delay of
+      signal arriving at different sensor.
+
+    \column{0.38\textwidth}
+      \begin{figure}
         \includegraphics[width=1\textwidth]{intro.png}
         \caption{Sensors and source.}
       \end{figure}
@@ -55,7 +58,7 @@
 
 \begin{frame}{Position Fix by TDOA: Noise}
   Vector of \textbf{TDOA}:
-    $$\bf{d} = \begin{bmatrix} d_2-d_1 & d_3-d_1 & \cdots \end{bmatrix}^\it{T}$$
+    $$\mathbf{d} = \begin{bmatrix} d_2-d_1 & d_3-d_1 & \cdots \end{bmatrix}^{T}$$
   However, 100\% precise measurement of \textbf{TDOA} is not possible.
   Noise is always present.
 
@@ -138,11 +141,11 @@
 \begin{frame}{Proposed Method: Arbitrary Array (cont'd)}
   \begin{itemize}
     \item Using ML estimator, $\mathbf{z}_a=\begin{bmatrix}x\\y\\r_1\end{bmatrix}$ can be obtained as
-          $$\begin{align}
+          $$\begin{aligned}
             \mathbf{z}_a&=\argmin\{(\mathbf{h}-\mathbf{G}_a\mathbf{z}_a)^T
                                     \Psi^{-1}(\mathbf{h}-\mathbf{G}_a\mathbf{z}_a)\}\\
                         &=(\mathbf{G}_a^T\Psi^{-1}\mathbf{G}_a)^{-1}\mathbf{G}_a^T\Psi^{-1}\mathbf{h}
-            \end{align}$$
+            \end{aligned}$$
     \item When the emitter is far away from the sensors,
           and since scaling of $\Psi$ do not effect the solution
           $\mathbf{z}_a$can be approximated as
@@ -175,7 +178,7 @@
     \item After acquiring $\mathbf{z}_a^{'}$, we have
           $$\mathbf{z}_a^{'}=
             \begin{bmatrix}(x^0-x_1)^2\\(y^0-y_1)^2\end{bmatrix}$$
-    \item Then $x^0$ and $y^0$ can be canculated by taking square roots of the positive values.
+    \item Then $x^0$ and $y^0$ can be calculated by taking square roots of the positive values.
   \end{itemize}
 \end{frame}
 
@@ -458,5 +461,5 @@
     \item \small The error thresholding effect doesn't occur until $ \sigma_d^2 = 0.0001 $
   \end{itemize}
 \end{frame}
- 
+
 \end{document}
